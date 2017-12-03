@@ -6,6 +6,4 @@ class Songs
     @title = title
   end
 
-
-
 end

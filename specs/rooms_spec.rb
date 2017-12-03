@@ -7,19 +7,19 @@ require_relative('../songs.rb')
 class RoomsTest < MiniTest::Test
 
   def setup
-    #room = Rooms.new(room_name, room_capacity, room_fee)
+    #room = Rooms.new(room_name, room_capacity, room_fee, songs_in_room)
     @room_1 = Rooms.new("The Party Room", 3, 20, nil)
     @room_2 = Rooms.new("The Disco Room", 4, 25, nil)
     #guest = Guests.new(guest_name, wallet)
-    @guest_1 = Guests.new("Ross", 100)
-    @guest_2 = Guests.new("Michael", 40)
-    @guest_3 = Guests.new("Graeme", 50)
-    @guest_4 = Guests.new("Richard",10)
+    @guest_1 = Guests.new("Ross", 100, "King Gizzard and the Lizard Wizard - Robot Stop")
+    @guest_2 = Guests.new("Michael", 40, "Hot Snakes - Paid In Cigarettes")
+    @guest_3 = Guests.new("Graeme", 50, "Thee Oh Sees - The Static God")
+    @guest_4 = Guests.new("Richard",10, "The Murlocs - Old Locomotive")
     #song = Songs.new(artist, title)
     @song_1 = Songs.new("King Gizzard and the Lizard Wizard - Robot Stop")
     @song_2 = Songs.new("King Gizzard and the Lizard Wizard - Big Fig Wasp")
     @song_3 = Songs.new("King Gizzard and the Lizard Wizard - Gamma Knife")
-    playlist = [@song_1, @song_2, @song_3]
+    # playlist = [@song_1.title, @song_2.title, @song_3.title]
   end
 
   def test_room_has_name
@@ -83,6 +83,12 @@ class RoomsTest < MiniTest::Test
     fee = @room_1.room_fee
     guest.pay_room_fee(guest, fee)
     assert_equal(80, guest.wallet)
+  end
+
+  def test_room_includes_favourite_song
+    @room_1.add_guest_to_room(@guest_1)
+    @room_1.add_song_to_room(@song_1.title)
+    assert_equal("Whooo!", @room_1.room_includes_favourite_song(@song_1.title))
   end
 
 end
