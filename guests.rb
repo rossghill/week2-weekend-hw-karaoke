@@ -7,6 +7,9 @@ attr_reader :guest_name, :wallet
     @wallet = wallet
   end
 
+  def pay_room_fee(guest, fee)
+    @wallet -= fee
+  end
 
 
 end

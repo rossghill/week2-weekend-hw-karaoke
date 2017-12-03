@@ -38,5 +38,9 @@ attr_reader :room_name, :room_capacity, :room_fee
     @songs_in_room << song
   end
 
+  # def room_includes_favourite_song(fav_song)
+  #   if @songs_in_room.include?(fav_song)
+  #   return "Whooo!"
+  # end
 
 end
