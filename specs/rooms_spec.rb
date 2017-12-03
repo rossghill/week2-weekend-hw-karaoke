@@ -7,8 +7,8 @@ require_relative('../songs.rb')
 class RoomsTest < MiniTest::Test
 
   def setup
-    @room_1 = Rooms.new("The Party Room", 3)
-    @room_2 = Rooms.new("The Disco Room", 4)
+    @room_1 = Rooms.new("The Party Room", 3, 20)
+    @room_2 = Rooms.new("The Disco Room", 4, 25)
     @guest_1 = Guests.new("Ross", 100)
     @guest_2 = Guests.new("Michael", 40)
     @guest_3 = Guests.new("Graeme", 50)
@@ -16,10 +16,19 @@ class RoomsTest < MiniTest::Test
     @song_1 = Songs.new("King Gizzard and the Lizard Wizard", "Robot Stop")
     @song_2 = Songs.new("King Gizzard and the Lizard Wizard", "Big Fig Wasp")
     @song_3 = Songs.new("King Gizzard and the Lizard Wizard", "Gamma Knife")
+    playlist = [@song_1, @song_2, @song_3]
   end
 
   def test_room_has_name
     assert_equal("The Party Room", @room_1.room_name())
+  end
+
+  def test_room_has_fee
+    assert_equal(25, @room_2.room_fee)
+  end
+
+  def test_room_has_a_capacity
+    assert_equal(3, @room_1.room_capacity)
   end
 
   def test_room_is_empty
@@ -45,6 +54,12 @@ class RoomsTest < MiniTest::Test
     assert_equal(2, @room_1.song_count)
   end
 
+  # def test_room_playlist
+  #   @room_1.add_song_to_room(@song_1)
+  #   @room_1.add_song_to_room(@song_2)
+  #   assert_equal(playlist, @room_1.songs_in_room)
+  # end
+
   def test_room_too_full_for_guest
     @room_1.add_guest_to_room(@guest_1)
     @room_1.add_guest_to_room(@guest_2)
@@ -53,8 +68,5 @@ class RoomsTest < MiniTest::Test
     assert_equal("Room full!", @room_1.room_capacity_check)
   end
 
-  def test_guest_has_money_in_wallet
-    assert_equal(100, @guest_1.wallet)
-  end
 
 end
