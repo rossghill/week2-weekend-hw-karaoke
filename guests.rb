@@ -11,5 +11,4 @@ attr_reader :guest_name, :wallet
     @wallet -= fee
   end
 
-
 end

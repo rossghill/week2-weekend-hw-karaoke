@@ -8,17 +8,17 @@ class RoomsTest < MiniTest::Test
 
   def setup
     #room = Rooms.new(room_name, room_capacity, room_fee)
-    @room_1 = Rooms.new("The Party Room", 3, 20)
-    @room_2 = Rooms.new("The Disco Room", 4, 25)
+    @room_1 = Rooms.new("The Party Room", 3, 20, [])
+    @room_2 = Rooms.new("The Disco Room", 4, 25, [])
     #guest = Guests.new(guest_name, wallet)
     @guest_1 = Guests.new("Ross", 100)
     @guest_2 = Guests.new("Michael", 40)
     @guest_3 = Guests.new("Graeme", 50)
     @guest_4 = Guests.new("Richard",10)
     #song = Songs.new(artist, title)
-    @song_1 = Songs.new("King Gizzard and the Lizard Wizard", "Robot Stop")
-    @song_2 = Songs.new("King Gizzard and the Lizard Wizard", "Big Fig Wasp")
-    @song_3 = Songs.new("King Gizzard and the Lizard Wizard", "Gamma Knife")
+    @song_1 = Songs.new("King Gizzard and the Lizard Wizard - Robot Stop")
+    @song_2 = Songs.new("King Gizzard and the Lizard Wizard - Big Fig Wasp")
+    @song_3 = Songs.new("King Gizzard and the Lizard Wizard - Gamma Knife")
     playlist = [@song_1, @song_2, @song_3]
   end
 
@@ -57,11 +57,10 @@ class RoomsTest < MiniTest::Test
     assert_equal(2, @room_1.song_count)
   end
 
-  # def test_room_playlist
-  #   @room_1.add_song_to_room(@song_1)
-  #   @room_1.add_song_to_room(@song_2)
-  #   assert_equal(playlist, @room_1.songs_in_room)
-  # end
+  def test_room_playlist
+    @room_1.add_song_to_room(@song_1.title)
+    assert_equal(["King Gizzard and the Lizard Wizard - Robot Stop"], @room_1.songs_in_room)
+  end
 
   def test_room_too_full_for_guest
     @room_1.add_guest_to_room(@guest_1)
@@ -77,6 +76,5 @@ class RoomsTest < MiniTest::Test
     guest.pay_room_fee(guest, fee)
     assert_equal(80, guest.wallet)
   end
-
 
 end

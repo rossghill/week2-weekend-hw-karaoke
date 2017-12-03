@@ -1,8 +1,8 @@
 class Rooms
 
-attr_reader :room_name, :room_capacity, :room_fee
+attr_reader :room_name, :room_capacity, :room_fee, :songs_in_room
 
-  def initialize (room_name, room_capacity, room_fee)
+  def initialize (room_name, room_capacity, room_fee, songs_in_room)
     @room_name = room_name
     @guests_in_room = []
     @songs_in_room = []
@@ -37,6 +37,7 @@ attr_reader :room_name, :room_capacity, :room_fee
   def add_song_to_room(song)
     @songs_in_room << song
   end
+
 
   # def room_includes_favourite_song(fav_song)
   #   if @songs_in_room.include?(fav_song)
